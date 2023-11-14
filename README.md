@@ -15,6 +15,7 @@ In this challenge, you will write the logic for [THIS APP](https://advanced-stat
 
 - Fork, clone, and `npm install`. You won't need to add any extra libraries.
 - Launch the project in a development server executing `npm run dev`.
+
 - Visit your app by navigating Chrome to `http://localhost:3000`.
 - Run tests locally executing `npm test`. The local test file is `codegrade_mvp.test.js`.
 
