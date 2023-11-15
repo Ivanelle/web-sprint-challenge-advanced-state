@@ -4,7 +4,7 @@ import * as actionCreators from '../state/action-creators'
 
 
 export function Form(props) {
-const { newQuestion, newTrueAnswer, newFalseAnswer } = props.form
+const { newQuestion, newFalseAnswer, newTrueAnswer} = props.form
 
   const onChange = evt => {
     const { id, value } = evt.target;
@@ -17,25 +17,29 @@ const { newQuestion, newTrueAnswer, newFalseAnswer } = props.form
     evt.preventDefault();
 
     props.postQuiz ({
-      question_text: newQuestion,
-      true_answer_text: newTrueAnswer,
-      false_answer_text: newFalseAnswer,
+      question_text: props.form.newQuestion,
+      true_answer_text: props.form.newTrueAnswer,
+      false_answer_text: props.form.newFalseAnswer
     })
   }
 
   return (
     <form id="form" onSubmit={onSubmit}>
       <h2>Create New Quiz</h2>
-      <input maxLength={50} onChange={onChange} id="newQuestion" placeholder="Enter question" />
-      <input maxLength={50} onChange={onChange} id="newTrueAnswer" placeholder="Enter true answer" />
-      <input maxLength={50} onChange={onChange} id="newFalseAnswer" placeholder="Enter false answer" />
-      <button id="submitNewQuizBtn">Submit new quiz</button>
+      <input maxLength={50} onChange={onChange} value={newQuestion.value} id="newQuestion" placeholder="Enter question" />
+      <input maxLength={50} onChange={onChange} value={newTrueAnswer.value} id="newTrueAnswer" placeholder="Enter true answer" />
+      <input maxLength={50} onChange={onChange} value={newFalseAnswer.value} id="newFalseAnswer" placeholder="Enter false answer" />
+      <button type='submit' id="submitNewQuizBtn">Submit new quiz</button>
     </form>
   )
 }
 
-const mapStateToProps = (state) => ({
-  form: state.form
-})
+const mapStateToProps = (state) => {
+  return {
+   form: state.form,
+  };
+};
+
+
 
 export default connect(mapStateToProps, actionCreators)(Form)

@@ -4,6 +4,7 @@ import axios from "axios";
 export const INPUT_CHANGE = 'INPUT_CHANGE'
 export const SET_QUIZ = 'SET_QUIZ';
 export const RESET_QUIZ = 'RESET_QUIZ';
+export const SET_MESSAGE = 'SET_MESSAGE';
 
 export function moveClockwise() { }
 
@@ -11,11 +12,18 @@ export function moveCounterClockwise() { }
 
 export function selectAnswer() { }
 
-export function setMessage() { }
+export function setMessage(message) { 
+  return {
+    type: SET_MESSAGE,
+    payload: message
 
-export function setQuiz() { 
+  }
+}
+
+export function setQuiz(quizData) { 
   return {
     type: SET_QUIZ,
+    payload: quizData
   
   }
 }
@@ -24,10 +32,10 @@ export function inputChange(id, value) {
  return {
   type: INPUT_CHANGE,
   payload: {
-    inputId: id,
-    value:  value
- }
-}
+    id,
+    value
+  }  
+  }
 }
   
 
@@ -63,7 +71,7 @@ export function postAnswer(payload) {
     })
     .then((res) => {
       dispatch({ type: RESET_QUIZ});
-      dispatch(setMessage(res.data));
+      dispatch(setMessage(res.data.message));
       dispatch(fetchQuiz());
     })
     .catch((error) => {
@@ -83,12 +91,14 @@ export function postQuiz(payload) {
       true_answer_text: payload.true_answer_text,
       false_answer_text: payload.false_answer_text
     })
-    .then(() => {
-      dispatch(setMessage('Quiz submitted successfully!'));
+    .then((response) => {
+      console.log('Quiz posted successfully:', response.data);
+      dispatch(setQuiz(response.data.quizData))
+      dispatch(setMessage(`Congrats: ${payload.question_text} is a great question!`));
       dispatch(resetForm())
     })
     .catch((error) => {
-      console.error('Error posting quiz:', error)
+      console.error('Error posting quiz:', error.message)
     })
     // On successful POST:
     // - Dispatch the correct message to the the appropriate state

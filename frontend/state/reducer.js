@@ -4,10 +4,11 @@ import
   INPUT_CHANGE,
   RESET_QUIZ, 
   SET_QUIZ,
+  SET_MESSAGE,
 } 
 from './action-creators'
 
-import { combineReducers } from 'redux'
+import { combineReducers } from 'redux';
 
 
 const initialWheelState = 0
@@ -19,9 +20,9 @@ const initialQuizState = null
 function quiz(state = initialQuizState, action) {
   switch (action.type) {
     case SET_QUIZ: 
-      return action.payload;
+      return action.payload || state
     case RESET_QUIZ: 
-      return initialQuizState
+      return state
     default: 
       return state
     }
@@ -34,7 +35,16 @@ function selectedAnswer(state = initialSelectedAnswerState, action) {
 
 const initialMessageState = ''
 function infoMessage(state = initialMessageState, action) {
-  return state
+
+  switch(action.type) {
+    case SET_MESSAGE:
+      return action.payload;
+
+      default:
+        return state
+
+  }
+
 }
 
 const initialFormState = {
@@ -47,9 +57,7 @@ function form(state = initialFormState, action) {
     case INPUT_CHANGE: 
       return {
         ...state,
-        newQuestion: action.payload,
-        newTrueAnswer: action.payload,
-        newFalseAnswer: action.payload
+        [action.payload.id]: action.payload.value
       }
 
     default:
