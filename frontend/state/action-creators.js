@@ -5,10 +5,20 @@ export const INPUT_CHANGE = 'INPUT_CHANGE'
 export const SET_QUIZ = 'SET_QUIZ';
 export const RESET_QUIZ = 'RESET_QUIZ';
 export const SET_MESSAGE = 'SET_MESSAGE';
+export const MOVE_COUNTERCLOCKWISE = 'MOVE_COUNTERCLOCKWISE';
+export const MOVE_CLOCKWISE = 'MOVE_CLOCKWISE';
 
-export function moveClockwise() { }
+export function moveClockwise() { 
+  return {
+    type: MOVE_CLOCKWISE
+  }
+}
 
-export function moveCounterClockwise() { }
+export function moveCounterClockwise() { 
+  return {
+    type: MOVE_COUNTERCLOCKWISE,
+  }
+}
 
 export function selectAnswer() { }
 

@@ -5,14 +5,33 @@ import
   RESET_QUIZ, 
   SET_QUIZ,
   SET_MESSAGE,
+  MOVE_CLOCKWISE,
+  MOVE_COUNTERCLOCKWISE
 } 
 from './action-creators'
 
 import { combineReducers } from 'redux';
 
 
-const initialWheelState = 0
+const initialWheelState = {index: 0, BNumber: 0}
 function wheel(state = initialWheelState, action) {
+
+  switch (action.type) {
+    case MOVE_CLOCKWISE: 
+      return {
+        ...state,
+        index: (state.index + 1) % 6,
+        BNumber: (state.index + 1) % 6
+        
+      }
+
+    case MOVE_COUNTERCLOCKWISE:
+      return {
+        ...state,
+        index: (state.index - 1 + 6) % 6,
+        BNumber: (state.index - 1 + 6) % 6
+      }
+  }
   return state
 }
 

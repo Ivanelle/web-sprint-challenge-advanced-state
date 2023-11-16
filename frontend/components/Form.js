@@ -26,9 +26,9 @@ const { newQuestion, newFalseAnswer, newTrueAnswer} = props.form
   return (
     <form id="form" onSubmit={onSubmit}>
       <h2>Create New Quiz</h2>
-      <input maxLength={50} onChange={onChange} value={newQuestion.value} id="newQuestion" placeholder="Enter question" />
-      <input maxLength={50} onChange={onChange} value={newTrueAnswer.value} id="newTrueAnswer" placeholder="Enter true answer" />
-      <input maxLength={50} onChange={onChange} value={newFalseAnswer.value} id="newFalseAnswer" placeholder="Enter false answer" />
+      <input minLength={1} maxLength={50} onChange={onChange} value={newQuestion.value} id="newQuestion" placeholder="Enter question" />
+      <input minLength={1} maxLength={50} onChange={onChange} value={newTrueAnswer.value} id="newTrueAnswer" placeholder="Enter true answer" />
+      <input minLength={1} maxLength={50} onChange={onChange} value={newFalseAnswer.value} id="newFalseAnswer" placeholder="Enter false answer" />
       <button type='submit' id="submitNewQuizBtn">Submit new quiz</button>
     </form>
   )
