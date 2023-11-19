@@ -24,7 +24,7 @@ export function moveCounterClockwise() {
 export function selectAnswer(answerId) { 
   return {
     type: SET_SELECTED_ANSWER,
-    payload: answerId
+    payload: answerId || null
 
   }
 }
