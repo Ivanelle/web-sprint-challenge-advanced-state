@@ -8,6 +8,7 @@ export const SET_MESSAGE = 'SET_MESSAGE';
 export const MOVE_COUNTERCLOCKWISE = 'MOVE_COUNTERCLOCKWISE';
 export const MOVE_CLOCKWISE = 'MOVE_CLOCKWISE';
 export const SET_SELECTED_ANSWER = 'SET_SELECTED_ANSWER';
+export const RESET_SELECTED_ANSWER = 'RESET_SELECTED_ANSWER';
 
 export function moveClockwise() { 
   return {
@@ -26,6 +27,12 @@ export function selectAnswer(answerId) {
     type: SET_SELECTED_ANSWER,
     payload: answerId || null
 
+  }
+}
+
+export function resetSelectedAnswer() {
+  return {
+    type: RESET_SELECTED_ANSWER
   }
 }
 

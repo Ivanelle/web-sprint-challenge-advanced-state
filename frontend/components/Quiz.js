@@ -3,18 +3,20 @@ import { connect } from 'react-redux';
 import * as actionCreators from '../state/action-creators';
 
 export function Quiz(props) {
-  const { quiz, setMessage, fetchQuiz, selectAnswer, selectedAnswer } = props;
+  const { quiz, setMessage, fetchQuiz, selectAnswer, selectedAnswer, resetSelectedAnswer } = props;
 
   const handleAnswerSubmit = () => {
     let correctAnswer = quiz.answers[0]
-    const isCorrect = selectedAnswer && selectedAnswer.answerId === correctAnswer.id
+    const isCorrect =  selectedAnswer.answerId === correctAnswer.answerId
 
     if (isCorrect) {
       setMessage('Nice job! That was the correct answer')
     } else {
       setMessage('What a shame! That was the incorrect answer')
-
+      console.log(selectedAnswer)
     }
+
+    resetSelectedAnswer()
     
     fetchQuiz();
   };
@@ -40,7 +42,7 @@ export function Quiz(props) {
               {quiz.answers.map((answer) => (
                 <div 
                   key={props.answerId}
-                  className={`answer ${selectedAnswer.answerId === answer.answer_id? 'selected' : null}`}
+                  className={`answer ${selectedAnswer.answerId === answer.answer_id ? 'selected' : null}`}
                   onClick={() => handleSelectAnswer(answer.answer_id)}
                 >
                     {answer.text}
@@ -52,7 +54,7 @@ export function Quiz(props) {
             ))}
           </div>
               
-          <button onClick={handleAnswerSubmit} id="submitAnswerBtn">
+          <button onClick={handleAnswerSubmit} id="submitAnswerBtn" disabled={!selectedAnswer.answerId}>
             Submit answer
           </button>
         </>

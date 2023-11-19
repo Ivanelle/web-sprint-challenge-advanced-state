@@ -7,7 +7,8 @@ import
   SET_MESSAGE,
   MOVE_CLOCKWISE,
   MOVE_COUNTERCLOCKWISE,
-  SET_SELECTED_ANSWER
+  SET_SELECTED_ANSWER,
+  RESET_SELECTED_ANSWER
 } 
 from './action-creators'
 
@@ -56,8 +57,14 @@ function selectedAnswer(state = initialSelectedAnswerState, action) {
   switch (action.type) {
     case SET_SELECTED_ANSWER:
       return {
-        answerId: action.payload
+        answerId: action.payload,
       }
+
+    case RESET_SELECTED_ANSWER:
+      return{
+        answerId: null
+      }
+
 
   }
   return state
