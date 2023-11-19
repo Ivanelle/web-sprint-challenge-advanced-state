@@ -20,9 +20,7 @@ export function Quiz(props) {
   };
 
   const handleSelectAnswer = (answerId) => {
-    console.log('Before selectAnswer', answerId)
       selectAnswer(answerId)
-      console.log('After selectAnswer', answerId)
     
   };
 
@@ -41,16 +39,15 @@ export function Quiz(props) {
             <div id="quizAnswers">
               {quiz.answers.map((answer) => (
                 <div 
-                  key={answer.id}
-                  className="answer selected" 
+                  key={props.answerId}
+                  className={`answer ${selectedAnswer.answerId === answer.answer_id? 'selected' : null}`}
                   onClick={() => handleSelectAnswer(answer.answer_id)}
                 >
                     {answer.text}
                 <button >
-                  {console.log('selectedAnswer', selectedAnswer)}
-                  {console.log('answer.id', answer.id)}
-                { selectAnswer.answerId === answer.id ? 'SELECTED' : 'Select'}
+                { selectedAnswer.answerId === answer.answer_id ? 'SELECTED' : 'Select' }
                 </button>
+                
               </div>
             ))}
           </div>
