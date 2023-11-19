@@ -7,6 +7,7 @@ export const RESET_QUIZ = 'RESET_QUIZ';
 export const SET_MESSAGE = 'SET_MESSAGE';
 export const MOVE_COUNTERCLOCKWISE = 'MOVE_COUNTERCLOCKWISE';
 export const MOVE_CLOCKWISE = 'MOVE_CLOCKWISE';
+export const SET_SELECTED_ANSWER = 'SET_SELECTED_ANSWER';
 
 export function moveClockwise() { 
   return {
@@ -20,7 +21,13 @@ export function moveCounterClockwise() {
   }
 }
 
-export function selectAnswer() { }
+export function selectAnswer(answerId) { 
+  return {
+    type: SET_SELECTED_ANSWER,
+    payload: answerId
+
+  }
+}
 
 export function setMessage(message) { 
   return {
@@ -31,11 +38,11 @@ export function setMessage(message) {
 }
 
 export function setQuiz(quizData) { 
+
   return {
     type: SET_QUIZ,
     payload: quizData
-  
-  }
+    }
 }
 
 export function inputChange(id, value) {
@@ -58,11 +65,12 @@ export function resetForm() {
 // ❗ Async action creators
 export function fetchQuiz() {
   return function (dispatch) {
-    dispatch({ type: RESET_QUIZ});
-
-    axios.get('http://localhost:9000/api/quiz/next')
+    dispatch({ type: RESET_QUIZ });
+    axios
+      .get('http://localhost:9000/api/quiz/next')
       .then((res) => {
-        dispatch(setQuiz(res.data))
+        const quizData = res.data
+        dispatch(setQuiz(quizData))
       })
       .catch((error) => {
         console.error('Error fetching quiz', error)
@@ -80,7 +88,7 @@ export function postAnswer(payload) {
       answer_id: payload.answer_id
     })
     .then((res) => {
-      dispatch({ type: RESET_QUIZ});
+      dispatch({ type: SET_QUIZ });
       dispatch(setMessage(res.data.message));
       dispatch(fetchQuiz());
     })

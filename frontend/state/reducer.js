@@ -6,7 +6,8 @@ import
   SET_QUIZ,
   SET_MESSAGE,
   MOVE_CLOCKWISE,
-  MOVE_COUNTERCLOCKWISE
+  MOVE_COUNTERCLOCKWISE,
+  SET_SELECTED_ANSWER
 } 
 from './action-creators'
 
@@ -37,11 +38,14 @@ function wheel(state = initialWheelState, action) {
 
 const initialQuizState = null
 function quiz(state = initialQuizState, action) {
+
   switch (action.type) {
     case SET_QUIZ: 
       return action.payload || state
+
     case RESET_QUIZ: 
       return state
+
     default: 
       return state
     }
@@ -49,6 +53,13 @@ function quiz(state = initialQuizState, action) {
 
 const initialSelectedAnswerState = null
 function selectedAnswer(state = initialSelectedAnswerState, action) {
+  switch (action.type) {
+    case SET_SELECTED_ANSWER:
+      return {
+        answerId: action.payload
+      }
+
+  }
   return state
 }
 
@@ -57,7 +68,7 @@ function infoMessage(state = initialMessageState, action) {
 
   switch(action.type) {
     case SET_MESSAGE:
-      return action.payload;
+      return action.payload
 
       default:
         return state
