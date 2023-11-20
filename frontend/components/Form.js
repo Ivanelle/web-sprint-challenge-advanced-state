@@ -1,6 +1,6 @@
-import React from 'react'
-import { connect } from 'react-redux'
-import * as actionCreators from '../state/action-creators'
+import React from 'react';
+import { connect } from 'react-redux';
+import * as actionCreators from '../state/action-creators';
 
 function CustomTextMatcher(content, element) {
   const hasText = (node) => node.textContent === content;
@@ -31,23 +31,25 @@ const { newQuestion, newFalseAnswer, newTrueAnswer} = props.form
     })
 
     props.resetForm()
+
   }
+
 
     const isValid = () => {
       return (
-        newQuestion.trim().length > 1 &&
-        newTrueAnswer.trim().length > 1 &&
-        newFalseAnswer.trim().length > 1
+        newQuestion && newQuestion.trim().length > 1 &&
+        newTrueAnswer && newTrueAnswer.trim().length > 1 &&
+        newFalseAnswer && newFalseAnswer.trim().length > 1
       );
     }
 
   return (
     <form id="form" onSubmit={onSubmit}>
       <h2>Create New Quiz</h2>
-      <input minLength={1} maxLength={50} onChange={onChange} value={newQuestion.value} id="newQuestion" placeholder="Enter question" />
-      <input minLength={1} maxLength={50} onChange={onChange} value={newTrueAnswer.value} id="newTrueAnswer" placeholder="Enter true answer" />
-      <input minLength={1} maxLength={50} onChange={onChange} value={newFalseAnswer.value} id="newFalseAnswer" placeholder="Enter false answer" />
-      <button type='submit' id="submitNewQuizBtn" disabled={!isValid()}>Submit new quiz</button>
+      <input minLength={1} maxLength={50} onChange={onChange} value={newQuestion || ''} id="newQuestion" placeholder="Enter question" />
+      <input minLength={1} maxLength={50} onChange={onChange} value={newTrueAnswer || ''} id="newTrueAnswer" placeholder="Enter true answer" />
+      <input minLength={1} maxLength={50} onChange={onChange} value={newFalseAnswer || ''} id="newFalseAnswer" placeholder="Enter false answer" />
+      <button  type='submit' id="submitNewQuizBtn" disabled={!isValid()} >Submit new quiz</button>
     </form>
   )
 }

@@ -10,7 +10,7 @@ import
   SET_SELECTED_ANSWER,
   RESET_SELECTED_ANSWER,
   ADD_QUIZ_TO_ROSTER, 
-  RESET_FORM
+  RESET_FORM,
 } 
 from './action-creators'
 
@@ -102,11 +102,11 @@ function form(state = initialFormState, action) {
     case INPUT_CHANGE: 
       return {
         ...state,
-        [action.payload.id]: action.payload.value
+        [action.payload.id]: action.payload.value || ''
       }
 
     case RESET_FORM:
-      return initialFormState
+      return ''
 
     default:
       return state;
