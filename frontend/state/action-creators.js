@@ -60,7 +60,7 @@ export function inputChange(id, value) {
   payload: {
     id,
     value: value.trim()
-  }  
+    } 
   }
 }
   
@@ -68,7 +68,7 @@ export function inputChange(id, value) {
 export function resetForm() { 
   return {
     type: RESET_FORM,
-  }
+  };
 }
 
 // ❗ Async action creators
@@ -121,7 +121,7 @@ export function postQuiz(payload) {
     .then((response) => {
       console.log('Quiz posted successfully:', response.data);
       dispatch(setQuiz(response.data.quizData))
-      dispatch(setMessage(`Congrats: ${payload.question_text} is a great question!`));
+      dispatch(setMessage(`Congrats: "${payload.question_text}" is a great question!`));
       dispatch(resetForm())
     })
     .catch((error) => {

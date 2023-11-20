@@ -14,7 +14,7 @@ function CustomTextMatcher(content, element) {
 }
 
 export function Form(props) {
-const { newQuestion, newFalseAnswer, newTrueAnswer, resetForm} = props.form
+const { newQuestion, newFalseAnswer, newTrueAnswer} = props.form
 
   const onChange = evt => {
     const { id, value } = evt.target;
@@ -30,7 +30,7 @@ const { newQuestion, newFalseAnswer, newTrueAnswer, resetForm} = props.form
       false_answer_text: props.form.newFalseAnswer
     })
 
-    resetForm()
+    props.resetForm()
   }
 
     const isValid = () => {
