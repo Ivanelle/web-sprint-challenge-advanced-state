@@ -6,16 +6,14 @@ export function Quiz(props) {
   const { quiz, setMessage, fetchQuiz, selectAnswer, selectedAnswer, resetSelectedAnswer } = props;
 
   const handleAnswerSubmit = () => {
-    let correctAnswer = quiz.answers[0].answer_id
-    const isCorrect =  selectedAnswer && selectedAnswer.answerId === correctAnswer
+    let correctAnswer = quiz.answers[0]
+    const isCorrect =  selectedAnswer && selectedAnswer.answerId === correctAnswer.answerId
+
     if (isCorrect) {
-     
       setMessage('Nice job! That was the correct answer')
     } else {
       setMessage('What a shame! That was the incorrect answer')
       console.log(selectedAnswer)
-      console.log(selectedAnswer.answerId)
-      console.log(correctAnswer)
     }
 
     resetSelectedAnswer()

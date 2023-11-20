@@ -9,6 +9,8 @@ export const MOVE_COUNTERCLOCKWISE = 'MOVE_COUNTERCLOCKWISE';
 export const MOVE_CLOCKWISE = 'MOVE_CLOCKWISE';
 export const SET_SELECTED_ANSWER = 'SET_SELECTED_ANSWER';
 export const RESET_SELECTED_ANSWER = 'RESET_SELECTED_ANSWER';
+export const RESET_FORM = 'RESET_FORM';
+export const ADD_QUIZ_TO_ROSTER = 'ADD_QUIZ_TO_ROSTER'
 
 export function moveClockwise() { 
   return {
@@ -57,7 +59,7 @@ export function inputChange(id, value) {
   type: INPUT_CHANGE,
   payload: {
     id,
-    value
+    value: value.trim()
   }  
   }
 }
@@ -65,7 +67,7 @@ export function inputChange(id, value) {
 
 export function resetForm() { 
   return {
-    type: RESET_QUIZ,
+    type: RESET_FORM,
   }
 }
 

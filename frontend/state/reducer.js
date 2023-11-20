@@ -8,7 +8,9 @@ import
   MOVE_CLOCKWISE,
   MOVE_COUNTERCLOCKWISE,
   SET_SELECTED_ANSWER,
-  RESET_SELECTED_ANSWER
+  RESET_SELECTED_ANSWER,
+  ADD_QUIZ_TO_ROSTER, 
+  RESET_FORM
 } 
 from './action-creators'
 
@@ -43,6 +45,12 @@ function quiz(state = initialQuizState, action) {
   switch (action.type) {
     case SET_QUIZ: 
       return action.payload || state
+
+    case ADD_QUIZ_TO_ROSTER:
+      return {
+        ...state,
+        roster: [...state.roster, action.payload]
+      }
 
     case RESET_QUIZ: 
       return state
@@ -96,6 +104,9 @@ function form(state = initialFormState, action) {
         ...state,
         [action.payload.id]: action.payload.value
       }
+
+    case RESET_FORM:
+      return initialFormState
 
     default:
       return state;
